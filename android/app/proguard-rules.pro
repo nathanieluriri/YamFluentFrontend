@@ -1,0 +1,4 @@
+-keep class com.antonkarpenko.ffmpegkit.** { *; }
+-keep class com.arthenica.ffmpegkit.** { *; }
+-keep class com.github.hiteshsondhi88.libffmpeg.** { *; }
+-keep class io.flutter.plugins.** { *; }

@@ -1,0 +1,89 @@
+name: yam_fluent
+description: "YamFluent is a language fluency app that helps learners speak, listen, read, and write confidently through interactive and practical lessons."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Networking
+  dio: ^5.7.0
+
+  # Routing
+  go_router: ^14.6.0
+
+  # Serialization
+  json_annotation: ^4.9.0
+  freezed_annotation: ^2.4.4
+
+  # Utils
+  logger: ^2.5.0
+  google_fonts: ^6.2.1
+  intl: ^0.19.0
+  fpdart: ^1.1.0
+  url_launcher: ^6.3.0
+  flutter_native_splash: ^2.4.7
+  # Video playback for loading screen animation
+  video_player: ^2.9.2
+  lottie: ^3.1.3
+
+  # Storage
+  hive_flutter: ^1.1.0
+  app_links: ^6.4.1
+  google_sign_in: ^7.2.0
+  animations: ^2.1.1
+  flutter_svg: ^2.0.10+1
+  flutter_animate: ^4.5.2
+  just_audio: ^0.9.39
+  tutorial_coach_mark: ^1.3.3
+  record: ^5.1.2
+  ffmpeg_kit_flutter_new: ^4.1.0
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Code Generation
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.3
+  json_serializable: ^6.9.0
+  freezed: ^2.5.7
+
+  # Linting
+  custom_lint: ^0.7.0
+  riverpod_lint: ^2.6.3
+
+dependency_overrides:
+  record_linux:
+    path: third_party/record_linux
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/videos/
+    - assets/faces/
+    - assets/body/
+    - assets/backgrounds/
+    - assets/animations/
+
+flutter_native_splash:
+  color: "#02131A"
+  image: assets/images/logo_dark.png
+  android_12:
+    image: assets/images/logo_dark.png
+    color: "#02131A"
