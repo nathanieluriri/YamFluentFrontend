@@ -39,7 +39,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             : '$detail Check your email.';
         if (mounted) {
           showAppSnackBar(context, message);
-          context.pop(); // Go back to login
+          context.pop(); 
         }
       } catch (e) {
         if (mounted) {

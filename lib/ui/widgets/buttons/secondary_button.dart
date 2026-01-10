@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// Secondary outlined pill button with optional leading widget.
-/// Renamed from SecondaryOutlineButton to SecondaryButton.
+
+
 class SecondaryButton extends StatefulWidget {
   const SecondaryButton({
     super.key,

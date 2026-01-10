@@ -15,7 +15,7 @@ class AuthBackgroundLayout extends StatelessWidget {
     required this.child,
     this.topOffset = 42,
     this.backgroundColor = const Color(0xFF001924),
-    this.ovalAngle = -35, // degrees
+    this.ovalAngle = -35, 
     this.reverseOvalAngle=35,
     this.ovalPosition = const Offset(244.5, 44.3),
     this.ovalSize = const Size(210, 130),
@@ -26,7 +26,7 @@ class AuthBackgroundLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Convert degrees → radians (Transform.rotate uses radians)
+    
     final rotation = ovalAngle * math.pi / 180;
     final rotation2 = reverseOvalAngle * math.pi / 180;
 
@@ -38,7 +38,7 @@ class AuthBackgroundLayout extends StatelessWidget {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Stack(
             children: [
-            // ✅ First oval (original position)
+            
             Positioned(
               top: ovalPosition.dy,
               left: ovalPosition.dx,
@@ -59,7 +59,7 @@ class AuthBackgroundLayout extends StatelessWidget {
               ),
             ),
 
-            // ✅ Second oval (mirrored to opposite side)
+            
             Positioned(
               top: ovalPosition.dy,
               left: screenWidth - ovalPosition.dx - ovalSize.width,
@@ -70,7 +70,7 @@ class AuthBackgroundLayout extends StatelessWidget {
               ),
             ),
 
-            // ✅ Foreground white container
+            
             Positioned.fill(
               top: topOffset,
               child: Container(

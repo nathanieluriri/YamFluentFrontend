@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../src/features/homepage/domain/scenario_option.dart';
 import '../loaders/app_loading_view.dart';
 
-/// Bottom sheet with search + list for selecting a speaking scenario.
+
 class ScenarioPickerSheet extends StatefulWidget {
   final AsyncValue<List<ScenarioOption>> scenarioOptions;
   final Future<AsyncValue<List<ScenarioOption>>> Function()? onRetry;

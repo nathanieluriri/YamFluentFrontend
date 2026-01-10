@@ -1,6 +1,6 @@
 class Message {
   final String id;
-  final String role; // 'user', 'assistant', 'system'
+  final String role; 
   final String content;
   final DateTime timestamp;
 

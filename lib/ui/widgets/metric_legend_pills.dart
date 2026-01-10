@@ -12,11 +12,11 @@ class MetricLegendPills extends StatelessWidget {
         border: const Border(
           top: BorderSide(
             color: Colors.white,
-            width: 1.0, // adjust thickness
+            width: 1.0, 
           ),
           bottom: BorderSide(
             color: Colors.white,
-            width: 2.0, // adjust thickness
+            width: 2.0, 
           ),
         ),
       ),

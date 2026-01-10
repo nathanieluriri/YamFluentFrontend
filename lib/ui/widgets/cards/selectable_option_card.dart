@@ -21,13 +21,13 @@ class SelectableOptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(16); // keep original sizing feel
+    final radius = BorderRadius.circular(16); 
 
     final background = selected
         ? const Color(0xFFFFFFFF)
         : const Color(0xADF8F8F8);
 
-    // Hard base shadow like your chip (tweak offset to taste)
+    
     final shadows = selected
         ? const [
             BoxShadow(
@@ -57,11 +57,11 @@ class SelectableOptionCard extends StatelessWidget {
           scale: selected ? 1.01 : 1.0,
           child: Stack(
             children: [
-              // Base card (this keeps the SAME width behavior as before)
+              
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeOut,
-                padding: const EdgeInsets.all(16), // keep original padding
+                padding: const EdgeInsets.all(16), 
                 decoration: BoxDecoration(
                   color: background,
                   borderRadius: radius,
@@ -105,7 +105,7 @@ class SelectableOptionCard extends StatelessWidget {
                 ),
               ),
 
-              // Inset-ish overlay (like your chip)
+              
               Positioned.fill(
                 child: IgnorePointer(
                   child: ClipRRect(
@@ -119,11 +119,11 @@ class SelectableOptionCard extends StatelessWidget {
                           end: Alignment.bottomCenter,
                           colors: selected
                               ? const [
-                                  Color(0x192EA9DE), // subtle blue tint
+                                  Color(0x192EA9DE), 
                                   Color(0x252EA9DE),
                                 ]
                               : const [
-                                  Color(0x01FFFFFF), // subtle white highlight
+                                  Color(0x01FFFFFF), 
                                   Colors.transparent,
                                 ],
                           stops: const [0.0, 0.5],

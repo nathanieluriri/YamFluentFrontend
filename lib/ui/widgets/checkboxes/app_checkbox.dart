@@ -31,7 +31,7 @@ class AppCheckbox extends StatelessWidget {
             activeColor: const Color(0xFF02344C),
             checkColor: const Color(0XFFFFFFFF),
             side: const BorderSide(
-              color: Color(0xFF02344C), // Or Colors.black26 if border needs to differ when unchecked
+              color: Color(0xFF02344C), 
               width: 1.5,
             ),
             shape: RoundedRectangleBorder(

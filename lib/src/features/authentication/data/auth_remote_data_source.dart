@@ -10,7 +10,7 @@ abstract class AuthRemoteDataSource {
   Future<UserDTO> signUp(String firstName, String lastName, String email, String password);
   Future<String> requestPasswordReset(String email);
   Future<String> confirmPasswordReset(String resetToken, String password);
-  Future<UserDTO> signInWithGoogle(); // Returns UserDTO if successful
+  Future<UserDTO> signInWithGoogle(); 
   Future<UserDTO> getCurrentUser();
   Future<UserDTO> refresh(String accessToken, String refreshToken);
   Future<void> logout();
@@ -108,10 +108,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<UserDTO> signInWithGoogle() async {
-    // TODO: Implement Google Sign In
-    // 1. Trigger Google Sign In Flow
-    // 2. Get Token
-    // 3. Send Token to Backend -> get UserDTO
+    
+    
+    
+    
     throw UnimplementedError('Google Sign In not implemented yet');
   }
 

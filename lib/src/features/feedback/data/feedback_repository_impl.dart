@@ -23,8 +23,8 @@ class FeedbackRepositoryImpl implements FeedbackRepository {
 
   @override
   Future<Either<Failure, Progress>> getUserProgress(String userId) async {
-    // TODO: Implement progress fetching
-    // Returning dummy progress for now
+    
+    
     return Right(Progress(
       userId: userId,
       currentStreak: 5,

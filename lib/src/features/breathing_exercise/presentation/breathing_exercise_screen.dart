@@ -10,9 +10,9 @@ import '../../../../ui/widgets/common/app_snackbar.dart';
 import 'session_controller.dart';
 
 enum BreathPhase {
-  inhale, // 4s
-  hold, // 2s
-  exhale, // 6s
+  inhale, 
+  hold, 
+  exhale, 
 }
 
 class BreathingExerciseScreen extends ConsumerStatefulWidget {
@@ -31,7 +31,7 @@ class _BreathingExerciseScreenState
   late AnimationController _controller;
   BreathPhase _phase = BreathPhase.inhale;
   int _cycleCount = 0;
-  static const int _totalCycles = 4; // 4 cycles of 12s = 48s
+  static const int _totalCycles = 4; 
   bool _isWaitingForSession = false;
   bool _didNavigate = false;
   bool _showTutorials = false;
@@ -41,13 +41,13 @@ class _BreathingExerciseScreenState
   void initState() {
     super.initState();
     _practiceHistoryLoad = _loadPracticeHistory();
-    // Total cycle duration: 4s + 2s + 6s = 12s
+    
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4), // Base duration for inhale
+      duration: const Duration(seconds: 4), 
     );
 
-    // Start API call immediately
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(sessionControllerProvider.notifier)
@@ -105,17 +105,17 @@ class _BreathingExerciseScreenState
   }
 
   Future<void> _checkSessionAndNavigate() async {
-    // Check session status
+    
     final sessionState = ref.read(sessionControllerProvider);
 
-    // If successful, navigate away
+    
     if (sessionState.status is AsyncData) {
       await _navigateWhenReady(sessionState.status.valueOrNull);
     } else if (sessionState.status is AsyncError) {
-      // Show retry dialog
+      
       _showRetryDialog();
     } else {
-      // Still loading? Show spinner and wait
+      
       if (!_isWaitingForSession) {
         _isWaitingForSession = true;
         showDissolveDialog(
@@ -129,9 +129,9 @@ class _BreathingExerciseScreenState
         );
       }
 
-      // Poll or wait for changes? Better to listen.
-      // We can return here and let the listener below handle navigation?
-      // But for simplicity, we just wait a bit or show UI "Preparing..."
+      
+      
+      
     }
   }
 
@@ -147,16 +147,16 @@ class _BreathingExerciseScreenState
         description: 'We couldn’t create your session. Try again?',
         primaryLabel: 'Retry',
         onPrimary: () {
-          Navigator.pop(context); // Close dialog
+          Navigator.pop(context); 
           ref
               .read(sessionControllerProvider.notifier)
               .startSessionCreation(widget.scenario);
-          _checkSessionAndNavigate(); // Check again (loops if still loading/error)
+          _checkSessionAndNavigate(); 
         },
         secondaryLabel: 'Cancel',
         onSecondary: () {
           Navigator.pop(context);
-          Navigator.pop(context); // Exit breathing
+          Navigator.pop(context); 
         },
         icon: Icons.wifi_off_rounded,
         iconColor: const Color(0xFFE08A3D),
@@ -213,7 +213,7 @@ class _BreathingExerciseScreenState
 
   @override
   Widget build(BuildContext context) {
-    // Listen to session state changes to auto-navigate if finished late
+    
     ref.listen(sessionControllerProvider, (prev, next) {
       if (_cycleCount < _totalCycles) return;
       if (next.status is AsyncData) {
@@ -224,14 +224,14 @@ class _BreathingExerciseScreenState
     });
 
     final screenWidth = MediaQuery.of(context).size.width;
-    // Ratio: 1039 / 440
+    
     final waveHeight = 739;
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Text at top
+          
           Positioned(
             top: MediaQuery.of(context).padding.top + 40,
             left: 0,
@@ -251,20 +251,20 @@ class _BreathingExerciseScreenState
             ),
           ),
 
-          // Body Waves
-          // They are bottom aligned, but oversized.
-          // We position them such that the top is visible.
-          // Using OverflowBox or Positioned with negative bottom?
+          
+          
+          
+          
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _controller,
               builder: (context, child) {
-                // value goes 0->1 (inhale), 1 (hold), 1->0 (exhale)
-                // BUT hold is handled by a separate delay, so controller is at 1.0 during hold logically
-                // if we don't reset it. My logic above:
-                // Inhale: forward(0->1)
-                // Hold: idle at 1.0
-                // Exhale: reverse(1->0)
+                
+                
+                
+                
+                
+                
 
                 final value = Curves.easeInOutCubic.transform(
                   _controller.value,
@@ -272,18 +272,18 @@ class _BreathingExerciseScreenState
 
                 final baseBottom = 0.0;
 
-                // ONLY blue_full moves (move it a lot more)
-                final fullRise = (waveHeight * 0.35) * value; // tweak 0.35
+                
+                final fullRise = (waveHeight * 0.35) * value; 
                 final fullBottom = baseBottom + fullRise;
 
-                // static layers
-                final b12Bottom = baseBottom; // static
-                final b20Bottom = baseBottom; // static
+                
+                final b12Bottom = baseBottom; 
+                final b20Bottom = baseBottom; 
 
                 final showFull = true;
-                // final show12 =
-                //     _phase == BreathPhase.hold || _phase == BreathPhase.exhale;
-                // final show20 = _phase == BreathPhase.exhale;
+                
+                
+                
                 final show12 = true;
                 final show20 = true;
 
@@ -310,7 +310,7 @@ class _BreathingExerciseScreenState
                         ),
                       ),
 
-                    // blue_full ALWAYS on top + moves fastest
+                    
                     if (showFull)
                       Positioned(
                         bottom: fullBottom - 300,
@@ -321,7 +321,7 @@ class _BreathingExerciseScreenState
                         ),
                       ),
 
-                    // face follows blue_full, 40px from its top
+                    
                     Positioned(
                       bottom: fullBottom + 150,
                       child: AnimatedSwitcher(
@@ -339,14 +339,14 @@ class _BreathingExerciseScreenState
             ),
           ),
 
-          // Cancel Button (Top Left)
+          
           Positioned(
             top: MediaQuery.of(context).padding.top + 10,
             left: 10,
             child: IconButton(
               icon: const Icon(Icons.close, color: Colors.black54),
               onPressed: () {
-                // confirm cancel
+                
                 showDissolveDialog(
                   context: context,
                   builder: (c) => AppModal(
@@ -354,8 +354,8 @@ class _BreathingExerciseScreenState
                     description: 'This will cancel your session creation.',
                     primaryLabel: 'Yes, Stop',
                     onPrimary: () {
-                      Navigator.pop(c); // Close dialog
-                      Navigator.pop(context); // Close screen
+                      Navigator.pop(c); 
+                      Navigator.pop(context); 
                     },
                     secondaryLabel: 'No',
                     onSecondary: () => Navigator.pop(c),

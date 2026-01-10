@@ -8,14 +8,14 @@ import '../domain/coaching_tip.dart';
 import '../domain/tip.dart';
 import 'coaching_tip_dto.dart';
 
-// REPOSITORY INTERFACE
+
 abstract interface class TipsRepository {
   Future<Either<Failure, List<Tip>>> getTips();
   Future<Either<Failure, CoachingTip>> createTip(String sessionId);
   Future<Either<Failure, CoachingTip>> getTipDetail(String tipId);
 }
 
-// DATA SOURCE
+
 class TipsRemoteDataSource {
   final Dio _dio;
 
@@ -82,7 +82,7 @@ class TipsRemoteDataSource {
   }
 }
 
-// REPOSITORY IMPLEMENTATION
+
 class TipsRepositoryImpl implements TipsRepository {
   final TipsRemoteDataSource _dataSource;
   TipsRepositoryImpl(this._dataSource);
@@ -145,7 +145,7 @@ class TipsRepositoryImpl implements TipsRepository {
   }
 }
 
-// PROVIDERS
+
 final tipsRemoteDataSourceProvider = Provider(
   (ref) => TipsRemoteDataSource(ref.watch(dioProvider)),
 );

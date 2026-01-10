@@ -45,7 +45,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF6750A4), // Deep Purple
+        seedColor: const Color(0xFF6750A4), 
         brightness: Brightness.light,
       ),
       textTheme: textTheme,
@@ -93,7 +93,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFFD0BCFF), // Light Purple
+        seedColor: const Color(0xFFD0BCFF), 
         brightness: Brightness.dark,
       ),
       textTheme: textTheme,

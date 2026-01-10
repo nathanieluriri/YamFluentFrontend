@@ -112,7 +112,7 @@ class _OnboardingFlowState extends ConsumerState<_OnboardingFlow> {
           !next.isLoading) {
         submitController.resetSubmissionFlag();
         submitController.resetSubmissionFlag();
-        // Navigate to loading screen to simulate personalization
+        
         if (mounted) {
           context.goNamed(
             'loading',

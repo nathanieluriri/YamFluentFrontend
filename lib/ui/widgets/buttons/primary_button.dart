@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../common/inner_shadow.dart';
 
-/// Primary pill button with shimmer sweep + inner shadow + press animations.
-/// Renamed from PrimaryShimmerButton to PrimaryButton for generic usage.
+
+
 class PrimaryButton extends StatefulWidget {
   const PrimaryButton({
     super.key,
@@ -13,9 +13,9 @@ class PrimaryButton extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 24),
     this.backgroundColor = const Color(0xFF2EA9DE),
     this.borderRadius = const BorderRadius.all(Radius.circular(999)),
-    this.innerShadowColor = const Color(0xCCFFFFFF), // Strong white inner shadow (80%)
+    this.innerShadowColor = const Color(0xCCFFFFFF), 
     this.innerShadowBlur = 10,
-    this.innerShadowOffset = const Offset(0, 3), // Top highlight
+    this.innerShadowOffset = const Offset(0, 3), 
     this.enableShimmer = true,
     this.shimmerDuration = const Duration(milliseconds: 1800),
     this.disabledOpacity = 0.45,
@@ -31,12 +31,12 @@ class PrimaryButton extends StatefulWidget {
   final Color backgroundColor;
   final BorderRadius borderRadius;
 
-  // Inner shadow spec
+  
   final Color innerShadowColor;
   final double innerShadowBlur;
   final Offset innerShadowOffset;
 
-  // Shimmer
+  
   final bool enableShimmer;
   final Duration shimmerDuration;
 
@@ -99,13 +99,13 @@ class _PrimaryButtonState extends State<PrimaryButton>
           decoration: BoxDecoration(
             color: widget.backgroundColor,
             borderRadius: widget.borderRadius,
-            // soft outer highlight (helps match the screenshot’s glossy top edge)
+            
             boxShadow: const [
               BoxShadow(
                 blurRadius: 10,
                 spreadRadius: 0,
                 offset: Offset(0, 6),
-                color: Color(0x14000000), // Dark soft shadow
+                color: Color(0x14000000), 
               ),
             ],
           ),
@@ -132,7 +132,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
           children: [
             base,
 
-            // Shimmer overlay (does NOT turn the button white)
+            
             if (widget.enableShimmer && enabled)
               Positioned.fill(
                 child: ClipRRect(
@@ -140,8 +140,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
                   child: AnimatedBuilder(
                     animation: _shimmerCtrl,
                     builder: (context, _) {
-                      final t = _shimmerCtrl.value; // 0..1
-                      final slide = (t * 2) - 0.5; // -0.5 .. 1.5 (so it fully passes)
+                      final t = _shimmerCtrl.value; 
+                      final slide = (t * 2) - 0.5; 
 
                       return Transform.translate(
                         offset: Offset(widget.width == null ? 0 : 0, 0),
@@ -149,7 +149,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
                           translation: Offset(slide, 0),
                           child: IgnorePointer(
                             child: Opacity(
-                              opacity: 0.35, // tweak highlight strength
+                              opacity: 0.35, 
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -174,7 +174,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
                 ),
               ),
 
-            // Press highlight overlay
+            
             if (enabled)
               Positioned.fill(
                 child: IgnorePointer(

@@ -34,7 +34,7 @@ class _YamFluentAppState extends ConsumerState<YamFluentApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Remove splash screen once app is initialized
+    
     FlutterNativeSplash.remove();
 
     final router = ref.watch(goRouterProvider);

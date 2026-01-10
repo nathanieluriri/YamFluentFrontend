@@ -183,7 +183,7 @@ class _SummaryCard extends StatelessWidget {
           _SummaryRow(label: 'Accuracy', value: summary.accuracyLabel),
           if (isLoading)
             const Padding(
-              // TODO: use YamFluentLoaderInline
+              
               padding: EdgeInsets.only(top: 10),
               child: YamFluentLoaderInline(),
             ),

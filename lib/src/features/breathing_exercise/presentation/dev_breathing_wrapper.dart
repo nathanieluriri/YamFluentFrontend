@@ -7,8 +7,8 @@ class DevBreathingWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // This is a test wrapper to endlessly show the breathing screen.
-    // In a real app, this might just be a button on a dev menu.
+    
+    
     return Scaffold(
       appBar: AppBar(title: const Text('Breathing Dev Test')),
       body: Center(

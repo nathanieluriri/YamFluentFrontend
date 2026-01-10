@@ -34,7 +34,7 @@ class PracticeCard extends StatelessWidget {
     final scenarioError = scenarioErrorText(scenarioState);
 
     return Container(
-      width: width, // keeps original width behavior
+      width: width, 
       decoration: BoxDecoration(
         color: const Color(0xFFF6F6FD),
         borderRadius: BorderRadius.circular(32),
@@ -50,9 +50,9 @@ class PracticeCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 26, 18, 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // DESIGN: centered
+          crossAxisAlignment: CrossAxisAlignment.center, 
           children: [
-            // Header row (centered)
+            
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -80,14 +80,14 @@ class PracticeCard extends StatelessWidget {
 
             const SizedBox(height: 18),
 
-            // Main prompt (centered, larger, more airy)
+            
             Text(
               promptText,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 24,
                 height: 1.18,
-                fontWeight: FontWeight.w500, // less heavy than before
+                fontWeight: FontWeight.w500, 
                 color: Color(0xFF011A25),
                 letterSpacing: -0.6,
               ),
@@ -111,17 +111,17 @@ class PracticeCard extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Meta row centered (ensure PracticeMetaRow can center itself)
+            
             PracticeMetaRow(
               difficultyLabel: difficultyLabel,
               difficultyRating: selected?.difficultyRating ?? 1,
-              // If PracticeMetaRow doesn't support centering, wrap it with Center:
-              // (Leaving as-is; you can wrap with Center(...) if needed)
+              
+              
             ),
 
             const SizedBox(height: 26),
 
-            // Primary CTA — big pill + soft shadow/glow feel
+            
             SizedBox(
               width: double.infinity,
               child: _GradientPillButton(
@@ -147,13 +147,13 @@ class PracticeCard extends StatelessWidget {
 
             const SizedBox(height: 18),
 
-            // Change scenario — center + lighter, like design
+            
             ChangeScenarioRow(
               isLoading: scenarioState.isLoading,
               errorText: scenarioError,
               onTap: onChangeScenario,
-              // If ChangeScenarioRow is left-aligned internally,
-              // consider updating it to center + underline.
+              
+              
             ),
           ],
         ),
@@ -162,8 +162,8 @@ class PracticeCard extends StatelessWidget {
   }
 }
 
-/// A button closer to the screenshot: pill + subtle gradient + shadow.
-/// Uses InkWell to keep tap feedback.
+
+
 class _GradientPillButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget child;

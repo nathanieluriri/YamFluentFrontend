@@ -92,7 +92,7 @@ class SelectableChip extends StatelessWidget {
                       child: selected
                           ? const DecoratedBox(
                               key: ValueKey('active'),
-                              // Simulate inset highlight with a top-down gradient overlay.
+                              
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,

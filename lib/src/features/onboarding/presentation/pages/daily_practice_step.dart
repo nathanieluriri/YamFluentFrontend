@@ -44,7 +44,7 @@ class _DailyPracticeStepState extends ConsumerState<DailyPracticeStep> {
         _touched = true;
       }
     } else if (times.isNotEmpty) {
-      // Set first option as default
+      
       _sliderIndex = 0;
       _touched = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {

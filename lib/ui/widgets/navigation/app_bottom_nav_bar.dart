@@ -75,7 +75,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
             color: Colors.white,
             border: Border.all(color: const Color(0xFFEBEBEB)),
             borderRadius: BorderRadius.circular(500),
-            // border: Border.all(color: const Color(0xFFEBEBEB)),
+            
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.008),
@@ -106,8 +106,8 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // If active, show bigger circle with color.
-    // If inactive, show just icon.
+    
+    
     return Expanded(
       child: GestureDetector(
         onTap: data.onTap,

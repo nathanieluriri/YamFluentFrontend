@@ -18,8 +18,8 @@ class SessionsApi {
     const int maxRetries = 2;
     int attempt = 0;
 
-    // Use try-catch block directly without while-true for simplicity unless strict loop needed
-    // But implementation plan called for retry.
+    
+    
 
     while (true) {
       try {
@@ -31,7 +31,7 @@ class SessionsApi {
         if (response.statusCode == 200 || response.statusCode == 201) {
           return _parseSessionId(response);
         } else {
-          // If status is not 2xx, treat as error
+          
           throw DioException(
             requestOptions: response.requestOptions,
             response: response,
@@ -46,7 +46,7 @@ class SessionsApi {
 
         await Future.delayed(
           Duration(milliseconds: 500 * (1 << attempt)),
-        ); // Exponential backoff
+        ); 
       } catch (e) {
         rethrow;
       }

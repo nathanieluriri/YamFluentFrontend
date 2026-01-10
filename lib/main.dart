@@ -24,7 +24,7 @@ void main() async {
       ),
     );
 
-    // Initialize Hive
+    
     await Hive.initFlutter();
 
     runApp(const ProviderScope(child: YamFluentApp()));

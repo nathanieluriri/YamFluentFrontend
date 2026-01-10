@@ -10,7 +10,7 @@ class Session {
   final SessionStatus status;
   final DateTime startedAt;
   final DateTime? endedAt;
-  final Map<String, dynamic> adaptiveParams; // difficulty, speed, etc.
+  final Map<String, dynamic> adaptiveParams; 
   final List<Message> messages;
   final List<Turn> turns;
   final int totalTurns;

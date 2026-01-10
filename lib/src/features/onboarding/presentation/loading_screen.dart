@@ -26,7 +26,7 @@ class LoadingScreen extends ConsumerStatefulWidget {
 }
 
 class _LoadingScreenState extends ConsumerState<LoadingScreen> {
-  // Timer duration in seconds
+  
   static const int _totalDuration = 15;
   static const int _phaseChangeDuration = 7;
 
@@ -86,9 +86,9 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
   void _startFactCycling() {
     _factTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
       if (!mounted) return;
-      // Stop cycling facts in the second phase if desired, or keep going.
-      // Based on design, we might want to stop or show a final message.
-      // For now, let's keep cycling until the end or show a static one for "All done".
+      
+      
+      
       if (_currentSecond < _phaseChangeDuration) {
         setState(() {
           _factIndex = (_factIndex + 1) % _facts.length;
@@ -119,7 +119,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
             children: [
               const Spacer(flex: 2),
 
-              // Video header section
+              
               Center(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -160,7 +160,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
                 ),
               ),
 
-              // Headings
+              
               SizedBox(
                 height: 40,
                 child: Align(
@@ -225,7 +225,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
                       isLeftAligned: true,
                     ),
 
-              // Subtitle / Random Facts
+              
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 600),
                 transitionBuilder: (child, animation) {

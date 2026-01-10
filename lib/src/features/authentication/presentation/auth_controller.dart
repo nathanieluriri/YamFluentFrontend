@@ -14,14 +14,14 @@ import '../domain/user.dart';
 import '../data/auth_repository_impl.dart';
 import 'user_profile_store.dart';
 
-// Provider for the UseCase
+
 final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
   return LoginUseCase(ref.watch(authRepositoryProvider));
 });
 
 final authBootstrapProvider = StateProvider<bool>((ref) => false);
 
-// AuthController to manage User state (AsyncValue<User?>)
+
 class AuthController extends AsyncNotifier<User?> {
   bool _hasLoadedSession = false;
   bool _isBootstrapped = false;
@@ -42,7 +42,7 @@ class AuthController extends AsyncNotifier<User?> {
         state = AsyncValue.data(next.user);
       }
     });
-    return null; // Initial state: not logged in
+    return null; 
   }
 
   Future<void> login(String email, String password) async {
@@ -88,7 +88,7 @@ class AuthController extends AsyncNotifier<User?> {
     final repo = ref.read(authRepositoryProvider);
     final result = await repo.requestPasswordReset(email);
     return result.fold(
-      (failure) => throw failure as Object, // Let UI handle error
+      (failure) => throw failure as Object, 
       (detail) => detail,
     );
   }
@@ -100,7 +100,7 @@ class AuthController extends AsyncNotifier<User?> {
     final repo = ref.read(authRepositoryProvider);
     final result = await repo.confirmPasswordReset(resetToken, password);
     return result.fold(
-      (failure) => throw failure as Object, // Let UI handle error
+      (failure) => throw failure as Object, 
       (detail) => detail,
     );
   }

@@ -11,7 +11,7 @@ class BreathingConfirmationModal extends StatelessWidget {
     required this.onCancel,
   });
 
-  // Static method to show the modal with blur
+  
   static Future<void> show({
     required BuildContext context,
     required VoidCallback onStart,
@@ -27,7 +27,7 @@ class BreathingConfirmationModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This widget is no longer used directly - use BreathingConfirmationModal.show() instead
+    
     return AppModal(
       title: 'Before you start…',
       description:
