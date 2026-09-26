@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/api_response.dart';
 import '../../../core/network/dio_provider.dart';
+import '../../../core/utils/epoch.dart';
 import '../domain/practice_session_summary.dart';
 
 class PracticeHistoryApi {
@@ -82,9 +83,7 @@ class _SessionSummaryDTO {
     return PracticeSessionSummary(
       id: id,
       scenario: scenario,
-      lastUpdated: lastUpdated == null
-          ? null
-          : DateTime.fromMillisecondsSinceEpoch(lastUpdated!),
+      lastUpdated: lastUpdated == null ? null : dateTimeFromEpoch(lastUpdated!),
       averageScore: averageScore,
       totalTurns: totalNumberOfTurns,
     );

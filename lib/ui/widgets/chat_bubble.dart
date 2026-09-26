@@ -27,6 +27,7 @@ class ChatBubble extends StatelessWidget {
     final bubbleColor = isUser ? const Color(0xFFE7EEF8) : Colors.white;
     final alignment = isUser ? Alignment.centerRight : Alignment.centerLeft;
     final timeText = _formatTimestamp(timestamp);
+    final hasSpeaker = showSpeaker && onSpeakerPressed != null;
 
     return Align(
       alignment: alignment,
@@ -37,7 +38,12 @@ class ChatBubble extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 8),
-              padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
+              padding: EdgeInsets.fromLTRB(
+                hasSpeaker && !isUser ? 34 : 14,
+                12,
+                hasSpeaker && isUser ? 34 : 14,
+                10,
+              ),
               decoration: BoxDecoration(
                 color: bubbleColor,
                 borderRadius: BorderRadius.circular(16),
@@ -63,7 +69,7 @@ class ChatBubble extends StatelessWidget {
                 ],
               ),
             ),
-            if (showSpeaker && onSpeakerPressed != null)
+            if (hasSpeaker)
               Positioned(
                 right: isUser ? -6 : null,
                 left: isUser ? null : -6,

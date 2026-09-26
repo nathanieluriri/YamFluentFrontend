@@ -8,6 +8,7 @@ import '../../../../ui/widgets/home/practice_card.dart';
 import '../../../../ui/widgets/navigation/app_bottom_nav_bar.dart';
 import 'home_actions.dart';
 import 'home_dashboard_controller.dart';
+import 'home_progress_providers.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(homeDashboardControllerProvider);
     final scenarioState = dashboardState.scenarioOptions;
+    final practiceDay = ref.watch(homePracticeDayProvider);
+    final dailyMinutes = ref.watch(homeDailyMinutesProvider);
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = math.min(screenWidth - 32, 420.0);
     Future<void> handleNavTap(int index) async {
@@ -47,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 10),
-                const HomeDayHeader(),
+                HomeDayHeader(dayLabel: 'Day $practiceDay'),
                 const SizedBox(height: 14),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -64,6 +67,7 @@ class HomeScreen extends ConsumerWidget {
                       child: PracticeCard(
                         state: dashboardState,
                         scenarioState: scenarioState,
+                        dailyMinutes: dailyMinutes,
                         width: cardWidth,
                         onChangeScenario: () => handleChangeScenarioTap(
                           context,

@@ -10,6 +10,7 @@ import 'practice_meta_row.dart';
 class PracticeCard extends StatelessWidget {
   final HomeDashboardState state;
   final AsyncValue<List<ScenarioOption>> scenarioState;
+  final int dailyMinutes;
   final double width;
   final VoidCallback onChangeScenario;
   final VoidCallback onStartSpeaking;
@@ -18,6 +19,7 @@ class PracticeCard extends StatelessWidget {
     super.key,
     required this.state,
     required this.scenarioState,
+    required this.dailyMinutes,
     required this.width,
     required this.onChangeScenario,
     required this.onStartSpeaking,
@@ -29,8 +31,8 @@ class PracticeCard extends StatelessWidget {
     final difficultyLabel = selected?.difficultyLabel ?? 'Beginner friendly';
     final benefits = selected?.benefits?.trim();
     final promptText = selected != null
-        ? 'Speak for 5 minutes\nabout ${selected.displayName.toLowerCase()} today.'
-        : 'Speak for 5 minutes\nabout work today.';
+        ? 'Speak for $dailyMinutes minutes\nabout ${selected.displayName.toLowerCase()} today.'
+        : 'Speak for $dailyMinutes minutes\nabout work today.';
     final scenarioError = scenarioErrorText(scenarioState);
 
     return Container(

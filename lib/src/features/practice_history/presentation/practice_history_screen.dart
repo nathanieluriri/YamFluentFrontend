@@ -39,6 +39,13 @@ class _PracticeHistoryScreenState extends ConsumerState<PracticeHistoryScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => context.pushNamed('tips'),
+            icon: const Icon(Icons.lightbulb_outline),
+            tooltip: 'Coaching tips',
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -599,11 +606,12 @@ class _CompletedSessionSheetState
       secondaryLabel: 'Close',
       onPrimary: () {
         Navigator.of(context).pop();
-        context.push(
+        context.pushNamed(
           'conversation',
           extra: {
             'scenarioId': widget.detail.scenario,
             'sessionId': widget.detail.id,
+            'showTutorials': false,
           },
         );
       },
@@ -736,7 +744,11 @@ class _ContinueSessionSheet extends StatelessWidget {
         Navigator.of(context).pop();
         context.pushNamed(
           'conversation',
-          extra: {'scenarioId': detail.scenario, 'sessionId': detail.id},
+          extra: {
+            'scenarioId': detail.scenario,
+            'sessionId': detail.id,
+            'showTutorials': false,
+          },
         );
       },
       onSecondary: () => Navigator.of(context).pop(),

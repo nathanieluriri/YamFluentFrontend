@@ -540,8 +540,12 @@ class _SessionSummary {
     if (start == null || end == null) return '—';
     final diff = end.difference(start);
     if (diff.isNegative) return '—';
-    final minutes = diff.inMinutes;
+    final days = diff.inDays;
+    final hours = diff.inHours.remainder(24);
+    final minutes = diff.inMinutes.remainder(60);
     final seconds = diff.inSeconds.remainder(60);
+    if (days > 0) return '${days}d ${hours}h';
+    if (hours > 0) return '${hours}h ${minutes}m';
     if (minutes == 0) return '${seconds}s';
     return '${minutes}m ${seconds}s';
   }
@@ -549,7 +553,7 @@ class _SessionSummary {
   static String _titleCase(String scenario) {
     final normalized = scenario.replaceAll('_', ' ').trim();
     if (normalized.isEmpty) return 'Practice';
-    final words = normalized.split(RegExp(r'\\s+'));
+    final words = normalized.split(RegExp(r'\s+'));
     return words
         .map((word) {
           if (word.isEmpty) return '';
@@ -609,8 +613,9 @@ class _KeyMoments {
             score.fluency > (bestFluency.score?.fluency ?? 0)) {
           bestFluency = turn;
         }
-        if (mostHesitant == null ||
-            score.hesitation > (mostHesitant.score?.hesitation ?? 0)) {
+        if (score.hesitation < 100 &&
+            (mostHesitant == null ||
+                score.hesitation < mostHesitant.score!.hesitation)) {
           mostHesitant = turn;
         }
         if (bestConfidence == null ||

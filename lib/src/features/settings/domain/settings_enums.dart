@@ -55,6 +55,8 @@ enum DailyPracticeTime {
   }
 
   String get label => value.trim();
+
+  int get minutes => int.parse(value.split(' ').first);
 }
 
 enum NativeLanguage {

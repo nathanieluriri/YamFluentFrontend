@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/logger.dart';
+import '../../authentication/presentation/user_profile_store.dart';
 import '../../ai_conversation/data/session_dto.dart';
 import '../../ai_conversation/data/sessions_api_client.dart';
 import '../data/practice_history_api.dart';
@@ -49,6 +50,13 @@ class PracticeHistoryController extends Notifier<PracticeHistoryState> {
       _sessionsApi = ref.read(sessionsApiClientProvider);
       _initialized = true;
     }
+    ref.listen(
+      userProfileStoreProvider.select((profile) => profile.user?.id),
+      (previous, next) {
+        if (next != null && next != previous) ref.invalidateSelf();
+      },
+    );
+    _hasLoaded = false;
     final initial = const PracticeHistoryState(
       sessions: AsyncValue.loading(),
     );

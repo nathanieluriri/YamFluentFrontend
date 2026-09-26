@@ -16,19 +16,22 @@ class YamFluentApp extends ConsumerStatefulWidget {
 }
 
 class _YamFluentAppState extends ConsumerState<YamFluentApp> {
+  late final DeepLinkService _deepLinkService;
+
   @override
   void initState() {
     super.initState();
+    _deepLinkService = ref.read(deepLinkServiceProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final router = ref.read(goRouterProvider);
-      ref.read(deepLinkServiceProvider).init(ref: ref, router: router);
+      _deepLinkService.init(ref: ref, router: router);
       ref.read(authControllerProvider.notifier).loadSessionOnStart();
     });
   }
 
   @override
   void dispose() {
-    ref.read(deepLinkServiceProvider).dispose();
+    _deepLinkService.dispose();
     super.dispose();
   }
 
