@@ -1,3 +1,4 @@
+import '../../../core/utils/epoch.dart';
 import '../domain/message.dart';
 import '../domain/session.dart';
 import '../domain/turn.dart';
@@ -142,11 +143,8 @@ class SessionDTO {
   static DateTime? _parseDate(Object? value) {
     if (value == null) return null;
     if (value is DateTime) return value;
-    if (value is int) {
-      return DateTime.fromMillisecondsSinceEpoch(value);
-    }
     if (value is num) {
-      return DateTime.fromMillisecondsSinceEpoch(value.toInt());
+      return dateTimeFromEpoch(value);
     }
     if (value is String) {
       return DateTime.tryParse(value);

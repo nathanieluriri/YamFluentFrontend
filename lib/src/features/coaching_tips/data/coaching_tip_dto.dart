@@ -1,3 +1,5 @@
+import '../../../core/utils/epoch.dart';
+
 class CoachingTipListItemDTO {
   final String id;
   final String sessionId;
@@ -29,8 +31,7 @@ class CoachingTipListItemDTO {
   static DateTime? _parseDate(Object? value) {
     if (value == null) return null;
     if (value is DateTime) return value;
-    if (value is int) return DateTime.fromMillisecondsSinceEpoch(value);
-    if (value is num) return DateTime.fromMillisecondsSinceEpoch(value.toInt());
+    if (value is num) return dateTimeFromEpoch(value);
     if (value is String) return DateTime.tryParse(value);
     return null;
   }
