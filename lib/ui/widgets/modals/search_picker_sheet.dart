@@ -16,9 +16,7 @@ class SearchPickerSheet {
     if (items.isEmpty) {
       return null;
     }
-    final controller = TextEditingController();
-    String? selected;
-    await showModalBottomSheet<void>(
+    return showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -28,96 +26,133 @@ class SearchPickerSheet {
           minChildSize: minChildSize,
           maxChildSize: maxChildSize,
           builder: (context, scrollController) {
-            return StatefulBuilder(
-              builder: (context, setState) {
-                final query = controller.text.trim().toLowerCase();
-                final filtered = query.isEmpty
-                    ? items
-                    : items
-                        .where((item) => item.toLowerCase().contains(query))
-                        .toList();
-                return SafeArea(
-                  top: false,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF3F4F6),
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.08),
-                          blurRadius: 16,
-                          offset: const Offset(0, -4),
-                        ),
-                      ],
-                    ),
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      top: 12,
-                      bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-                    ),
-                    child: Column(
-                      children: [
-                        _GrabHandle(),
-                        _SearchBar(
-                          controller: controller,
-                          placeholder: placeholder,
-                          onChanged: (_) => setState(() {}),
-                          onClear: () => setState(controller.clear),
-                        ),
-                        const SizedBox(height: 16),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            sectionTitle,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        if (filtered.isEmpty)
-                          _EmptyState(
-                            title: emptyTitle,
-                            subtitle: emptySubtitle,
-                          )
-                        else
-                          Expanded(
-                            child: ListView.builder(
-                              controller: scrollController,
-                              itemCount: filtered.length,
-                              itemBuilder: (context, index) {
-                                final item = filtered[index];
-                                return _PickerItemTile(
-                                  label: item,
-                                  onTap: () {
-                                    selected = item;
-                                    Navigator.of(context).pop();
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        if (showCancelButton) ...[
-                          const SizedBox(height: 12),
-                          _CancelButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                );
-              },
+            return _SearchPickerBody(
+              items: items,
+              placeholder: placeholder,
+              emptyTitle: emptyTitle,
+              emptySubtitle: emptySubtitle,
+              sectionTitle: sectionTitle,
+              showCancelButton: showCancelButton,
+              scrollController: scrollController,
             );
           },
         );
       },
     );
-    controller.dispose();
-    return selected;
+  }
+}
+
+class _SearchPickerBody extends StatefulWidget {
+  final List<String> items;
+  final String placeholder;
+  final String emptyTitle;
+  final String emptySubtitle;
+  final String sectionTitle;
+  final bool showCancelButton;
+  final ScrollController scrollController;
+
+  const _SearchPickerBody({
+    required this.items,
+    required this.placeholder,
+    required this.emptyTitle,
+    required this.emptySubtitle,
+    required this.sectionTitle,
+    required this.showCancelButton,
+    required this.scrollController,
+  });
+
+  @override
+  State<_SearchPickerBody> createState() => _SearchPickerBodyState();
+}
+
+class _SearchPickerBodyState extends State<_SearchPickerBody> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final query = _controller.text.trim().toLowerCase();
+    final filtered = query.isEmpty
+        ? widget.items
+        : widget.items
+            .where((item) => item.toLowerCase().contains(query))
+            .toList();
+    return SafeArea(
+      top: false,
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFF3F4F6),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 16,
+              offset: const Offset(0, -4),
+            ),
+          ],
+        ),
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 12,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+        ),
+        child: Column(
+          children: [
+            _GrabHandle(),
+            _SearchBar(
+              controller: _controller,
+              placeholder: widget.placeholder,
+              onChanged: (_) => setState(() {}),
+              onClear: () => setState(_controller.clear),
+            ),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.sectionTitle,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            if (filtered.isEmpty)
+              _EmptyState(
+                title: widget.emptyTitle,
+                subtitle: widget.emptySubtitle,
+              )
+            else
+              Expanded(
+                child: ListView.builder(
+                  controller: widget.scrollController,
+                  itemCount: filtered.length,
+                  itemBuilder: (context, index) {
+                    final item = filtered[index];
+                    return _PickerItemTile(
+                      label: item,
+                      onTap: () => Navigator.of(context).pop(item),
+                    );
+                  },
+                ),
+              ),
+            if (widget.showCancelButton) ...[
+              const SizedBox(height: 12),
+              _CancelButton(
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 }
 
