@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/utils/failure.dart';
+import '../../authentication/presentation/user_profile_store.dart';
 import '../data/settings_local_data_source.dart';
 import '../data/settings_repository_impl.dart';
 import '../domain/settings_enums.dart';
@@ -22,6 +23,12 @@ final updateDeviceStateUseCaseProvider = Provider<UpdateDeviceStateUseCase>((ref
 class SettingsController extends AsyncNotifier<SettingsView> {
   @override
   Future<SettingsView> build() async {
+    ref.listen(
+      userProfileStoreProvider.select((profile) => profile.user?.id),
+      (previous, next) {
+        if (next != null && next != previous) ref.invalidateSelf();
+      },
+    );
     final deviceId = await ref.read(settingsLocalDataSourceProvider).getOrCreateDeviceId();
     final result = await ref.read(getSettingsUseCaseProvider)(deviceId: deviceId);
     return result.fold(
