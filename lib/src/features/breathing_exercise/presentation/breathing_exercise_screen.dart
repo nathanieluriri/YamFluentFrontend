@@ -60,7 +60,7 @@ class _BreathingExerciseScreenState
     try {
       final sessions = await ref
           .read(practiceHistoryApiProvider)
-          .listSessions(pageNumber: 1);
+          .listSessions(start: 0, stop: 1);
       _showTutorials = sessions.isEmpty;
     } catch (_) {
       _showTutorials = true;
